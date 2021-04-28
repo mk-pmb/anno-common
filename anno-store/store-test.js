@@ -1,3 +1,5 @@
+import upperCaseFirstChar from 'lodash.upperfirst';
+
 const inspect = require('@kba/anno-util/inspect')
 const fixtures = require(__dirname + '/../anno-fixtures')
 const toImport = {
@@ -13,11 +15,23 @@ const toImport = {
   ]
 }
 
-const input1 = fixtures.Annotation.ok['minimal-string-target.json']
+
+const targetTypes = [
+  'string',
+  'object',
+  'array',
+];
+const inputs = {};
+targetTypes.forEach(function addTargetTypeInput(tt) {
+  const bfn = `minimal-${tt}-target`;
+  inputs[toCamelCase(bfn)]
+});
+  const input1 = fixtures.Annotation.ok['minimal-string-target.json']
+  const input2 = fixtures.Annotation.ok['minimal-object-target.json']
+  const input3 = fixtures.Annotation.ok['minimal-array-target.json']
+  const input4 = {target: 'x://y', body: {type: ['oa:Tag']}}
+}
 const newTarget = 'https://foo.example.bar'
-const input2 = fixtures.Annotation.ok['minimal-object-target.json']
-const input3 = fixtures.Annotation.ok['minimal-array-target.json']
-const input4 = {target: 'x://y', body: {type: ['oa:Tag']}}
 
 module.exports = class StoreTests {
 
